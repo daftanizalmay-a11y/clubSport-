@@ -11,8 +11,8 @@ export function useAuth() {
   useEffect(() => {
     const supabase = createClient()
 
-    supabase.auth.getUser().then(({ data }) => {
-      setUser(data.user ?? null)
+    supabase.auth.getUser().then(({ data: { user } }: { data: { user: User | null } }) => {
+      setUser(user ?? null)
       setLoading(false)
     })
 
