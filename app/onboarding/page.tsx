@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import type { User } from '@supabase/supabase-js'
 import { createClient } from '@/lib/supabase/browser'
 
 const sports = [
@@ -44,10 +45,10 @@ export default function OnboardingPage() {
 
   useEffect(() => {
     const supabase = createClient()
-    supabase.auth.getUser().then(({ data }) => {
-      if (!data.user) { router.push('/auth/login'); return }
-      setUser(data.user)
-      setForm(prev => ({ ...prev, contact_email: data.user.email || '' }))
+    supabase.auth.getUser().then(({ data: { user } }: { data: { user: User | null } }) => {
+      if (!user) { router.push('/auth/login'); return }
+      setUser(user)
+      setForm(prev => ({ ...prev, contact_email: user.email || '' }))
     })
   }, [router])
 
