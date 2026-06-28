@@ -1,8 +1,6 @@
 {
-  "crons": [
-    {
-      "path": "/api/cron/fixtures-sync",
-      "schedule": "0 * * * *"
-    }
-  ]
+  "crons": [{
+    "path": "/api/cron/fixtures-sync",
+    "schedule": "0 0 * * *"
+  }]
 }
